@@ -1,0 +1,282 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-serif: var(--font-italiana), 'Italiana', Georgia, serif;
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep: var(--gold-deep);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: dark;
+  /* Palette: midnight, ivory, gold, pale gold, deep gold */
+  --background: #07060a;
+  --foreground: #f3e9d2;
+  --gold: #d4af37;
+  --gold-light: #f7e7a6;
+  --gold-deep: #7a5a16;
+
+  --card: rgb(20 16 12 / 0.55);
+  --card-foreground: var(--foreground);
+  --popover: #0f0c0a;
+  --popover-foreground: var(--foreground);
+  --primary: var(--gold);
+  --primary-foreground: var(--background);
+  --secondary: #16120d;
+  --secondary-foreground: var(--foreground);
+  --muted: #16120d;
+  --muted-foreground: #bfae8c;
+  --accent: var(--gold-light);
+  --accent-foreground: var(--background);
+  --destructive: #d45a3a;
+  --border: rgb(212 175 55 / 0.28);
+  --input: rgb(212 175 55 / 0.3);
+  --ring: var(--gold);
+  --radius: 0.75rem;
+
+  --gold-gradient: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    #b8892a 10%,
+    var(--gold) 20%,
+    #fff6d0 30%,
+    var(--gold-light) 36%,
+    var(--gold) 46%,
+    var(--gold-deep) 58%,
+    #c9a24a 68%,
+    #fff3c4 78%,
+    var(--gold) 88%,
+    var(--gold-deep) 100%
+  );
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    overscroll-behavior-y: none;
+  }
+}
+
+/* Polished metallic gold lettering with a travelling shine */
+.gold-text {
+  background-image: var(--gold-gradient);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* One crisp bevel shadow; stacked blurred drop-shadows re-rasterize every shine frame. */
+  filter: drop-shadow(0 1.5px 0.5px rgb(30 18 3 / 0.9));
+  animation: gold-shine 7s linear infinite;
+}
+
+.gold-text-soft {
+  background-image: var(--gold-gradient);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shine 9s linear infinite;
+}
+
+@keyframes gold-shine {
+  from {
+    background-position: 130% 50%;
+  }
+  to {
+    background-position: -130% 50%;
+  }
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, transparent);
+}
+
+.gold-frame {
+  position: relative;
+  background: linear-gradient(180deg, rgb(28 22 14 / 0.72), rgb(10 8 8 / 0.78));
+  border: 1px solid rgb(212 175 55 / 0.45);
+  box-shadow:
+    inset 0 0 0 4px rgb(7 6 10 / 0.6),
+    inset 0 0 0 5px rgb(212 175 55 / 0.22),
+    0 0 40px rgb(212 175 55 / 0.14),
+    0 0 90px rgb(247 231 166 / 0.06);
+}
+
+/* Light leaking from the edges of the ornamental frames */
+.gold-frame::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 40% at 0% 0%, rgb(247 231 166 / 0.35), transparent 70%),
+    radial-gradient(50% 35% at 100% 100%, rgb(212 175 55 / 0.3), transparent 70%);
+  will-change: opacity;
+  animation: leak-pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes leak-pulse {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0) scale(0.96);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Skip layout/paint for off-screen sections until they approach the viewport */
+main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8vw, 6vh, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-6vw, -4vh, 0) scale(0.92);
+  }
+}
+
+@keyframes leak-sweep {
+  0% {
+    transform: translate3d(-80vw, 0, 0) skewX(-12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  60% {
+    transform: translate3d(160vw, 0, 0) skewX(-12deg);
+    opacity: 1;
+  }
+  61%,
+  100% {
+    transform: translate3d(160vw, 0, 0) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes beam-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes seam-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.6);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes scroll-dot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(22px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
