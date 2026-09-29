@@ -78,7 +78,7 @@ export const wedding = {
       id: 'reception-kayamkulam',
       title: 'Wedding Reception',
       subtitle: 'Kayamkulam',
-      shortTitle: 'Reception',
+      shortTitle: 'Followed By Reception',
       start: '2026-11-07T12:30:00+05:30',
       end: '2026-11-07T15:00:00+05:30',
       timeLabel: 'Afternoon',
@@ -106,8 +106,8 @@ export const wedding = {
   ],
   closing: {
     heading: 'With love & prayers',
-    names: ['Geo Antony', 'Jinisha Geo', 'Ethen Dominic', 'Alona Varghese'],
-    place: 'India',
+    names: ['Geo Antony', 'Jinsha Geo', 'Ethen Dominic', 'Alona Varghese', 'Carlynn', 'Aithal'],
+    place: '',
   },
   music: {
     /** Optional local file, e.g. "/audio/wedding-song.mp3". When set it is used instead of YouTube. */
