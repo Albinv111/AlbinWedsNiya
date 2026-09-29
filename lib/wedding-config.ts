@@ -76,7 +76,7 @@ export const wedding = {
     },
     {
       id: 'reception-kayamkulam',
-      title: 'Followed By Wedding Reception',
+      title: 'Thereafter Wedding Reception',
       subtitle: 'Kayamkulam',
       shortTitle: 'Thereafter Reception',
       start: '2026-11-07T12:30:00+05:30',
